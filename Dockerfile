@@ -1,6 +1,6 @@
 FROM golang:1.11.4
 
-WORKDIR /go/src/github.com/naoki-kishi/go-api-sample
+WORKDIR /go/src/github.com/multimedia_ms
 COPY . .
 ENV GO111MODULE=on
 

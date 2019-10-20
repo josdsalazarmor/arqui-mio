@@ -3,7 +3,7 @@ package persistance
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"github.com/naoki-kishi/go-api-sample/domain/model"
+	"github.com/multimedia_ms/domain/model"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
@@ -17,7 +17,7 @@ func NewSQLDB() *gorm.DB {
 		"password",
 		"db",
 		"3306",
-		"go-api",
+		"multimedia_db",
 	)
 
 	conn, err := gorm.Open("mysql", connectionString)	
@@ -32,8 +32,8 @@ func NewSQLDB() *gorm.DB {
 		panic(err)
 	}
 	conn.LogMode(true)
-	conn.Delete(&model.Entry{})
-	conn.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&model.Entry{})
+	conn.Unscoped().Delete(&model.Files{})
+	conn.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&model.Files{})
 
 	return conn
 }

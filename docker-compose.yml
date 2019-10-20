@@ -3,7 +3,7 @@ services:
     api:
         build: .
         volumes:
-            - ./:/go/src/github.com/naoki-kishi/go-api-sample
+            - ./:/go/src/multimedia_ms/go-api-sample
         ports:
             - '8081:8081'
         depends_on:
@@ -19,7 +19,7 @@ services:
             - ./db/config/charset.cnf:/etc/mysql/conf.d/charset.cnf
 
         environment:
-            MYSQL_DATABASE: go-api
+            MYSQL_DATABASE: multimedia_db
             MYSQL_ROOT_PASSWORD: password
             MYSQL_USER: user
             MYSQL_PASSWORD: password

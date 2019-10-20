@@ -2,8 +2,8 @@ package persistance
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/naoki-kishi/go-api-sample/domain/model"
-	"github.com/naoki-kishi/go-api-sample/usecase/repository"
+	"github.com/multimedia_ms/domain/model"
+	"github.com/multimedia_ms/usecase/repository"
 )
 
 type entryRepository struct {
@@ -15,36 +15,36 @@ func NewEntryRepository(db *gorm.DB) repository.EntryRepository {
 	return &entryRepository{db}
 }
 
-func (eR *entryRepository) FindByID(id int) (*model.Entry, error) {
-	entry := model.Entry{ID: id}
-	err := eR.db.Preload("Tags").First(&entry).Error
+func (eR *entryRepository) FindByID(userId int) (*model.Files, error) {
+	files := model.Files{UserId: userId}
+	err := eR.db.First(&files, userId).Error
 	if err != nil {
 		return nil, err
 	}
 
-	return &entry, nil
+	return &files, nil
 }
 
-func (eR *entryRepository) Store(entry *model.Entry) error {
-	return eR.db.Save(entry).Error
+func (eR *entryRepository) Store(files *model.Files) error {
+	return eR.db.Save(files).Error
 }
 
-func (eR *entryRepository) Update(entry *model.Entry) error {
+func (eR *entryRepository) Update(files *model.Files) error {
 	// Save will include all fields when perform the Updating SQL, even it is not changed
-	return eR.db.Model(&model.Entry{ID: entry.ID}).Updates(entry).Error
+	return eR.db.Model(&model.Files{UserId: files.UserId}).Updates(files).Error
 }
 
-func (eR *entryRepository) Delete(entry *model.Entry) error {
-	return eR.db.Delete(entry).Error
+func (eR *entryRepository) Delete(files *model.Files) error {
+	return eR.db.Delete(files).Error
 }
 
-func (eR *entryRepository) FindAll() ([]*model.Entry, error) {
-	entries := []*model.Entry{}
-
-	err := eR.db.Preload("Tags").Find(&entries).Error
+func (eR *entryRepository) FindAll() ([]*model.Files, error) {
+	filess := []*model.Files{}
+		
+	err := eR.db.Find(&filess).Error
 	if err != nil {
 		return nil, err
-	}
 
-	return entries, nil
+	}
+	return filess,nil
 }

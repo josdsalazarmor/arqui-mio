@@ -5,13 +5,6 @@
 - Web Framework : Gin (https://github.com/gin-gonic/gin)
 - ORM : GORM (https://github.com/jinzhu/gorm)
 
-## Getting Started
-```
-git pull https://github.com/naoki-kishi/go-api-sample
-cd go-api-sample
-docker-compose up
-```
-
 ## API docments
 
 ### Entry
@@ -66,8 +59,10 @@ Request example
 #### Response example
 ```json
 {
-  "id": 1,
-  "name": "tag1"
+  "userid": 1,
+  "name": "algoooo",
+  "link": "www.algo12321.co",
+  "chatID": "1243123213"
 }
 ```
 
